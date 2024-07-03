@@ -21,14 +21,14 @@
         </ul>
         {% endif %}
         <label for="">Title</label>
-        <input name="title" type="text" required value=blog.>
+        <input name="title" type="text" value="{{ blogs.title }}" required>
         <label for="">Subtitle</label>
-        <input name="subtitle" type="text" required>
+        <input name="subtitle" type="text" value="{{ blogs.subtitle }}" required>
         <label for="">Description</label>
-        <input name="description" type="text" required>
+        <input name="description" type="text" value="{{ blogs.description }}" required>
         <label for="">Receipe Image</label>
         <input name="image" type="file">
-        <button type="submit">Add Blog</button>
+        <button type="submit">Update Blog</button>
     </form>
 </body>
 </html>
