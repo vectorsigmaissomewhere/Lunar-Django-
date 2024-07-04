@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read Blogs</title>
+</head>
+<body>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    <ul>
+        <li><a href="{% url 'read' %}">Read</a></li>
+        <li><a href="{% url 'create' %}">Create</a></li>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Subtitle</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for blog in page_obj %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ blog.title }}</td>
+                <td>{{ blog.subtitle }}</td>
+                <td>{{ blog.description }}</td>
+                <td>
+                    <img src="{{ blog.image.url }}" style="height: 100px;">
+                </td>
+                <td>
+                    <a href="{% url 'update' blog.id %}">Update</a>
+                </td>
+                <td>
+                    <a href="{% url 'delete' blog.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <center>
+        {% if page_obj.has_previous %} {# whether the previous page number #}
+            <a href="?page={{page_obj.previous_page_number}}"><</a> {# link to the previous page#}
+        {% endif %}
+        <span>{{ page_obj.number }}</span>
+        {%if page_obj.has_next %} {# the current page number #}
+            <a href="?page={{page_obj.next_page_number}}">></a> {# link to the next page #}
+        {% endif %}
+    </center>
+</body>
+</html>
