@@ -1,7 +1,7 @@
 ﻿# Lunar-Django-
 
 
-There are three projects
+There are three projects in this repo
 ```text
 lunar
 myproject
