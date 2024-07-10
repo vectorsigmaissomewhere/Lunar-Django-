@@ -23,17 +23,20 @@ def create(request):
 
 # CREATING BLOG USING MODELFORM
 def create(request):
-    if request.method == "POST":
-        form = BlogForm(request.POST, request.FILES)
-        form.user_id = request.user.id
-        if form.is_valid():
-            blog = form.save(commit=False)
-            blog.user = request.user
-            blog.save()
-            return redirect('create')
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = BlogForm(request.POST, request.FILES)
+            form.user_id = request.user.id
+            if form.is_valid():
+                blog = form.save(commit=False)
+                blog.user = request.user
+                blog.save()
+                return redirect('create')
+        else:
+            form = BlogForm()
+        return render(request, 'create.html',{'form':form})
     else:
-        form = BlogForm()
-    return render(request, 'create.html',{'form':form})
+        return redirect('login')
 
 """
 FOR SIGNUP WE HAVE USED SIGNUPFORM INHERITED FROM USERCREATTIONFORM 
@@ -86,28 +89,34 @@ def read(request):
         return HttpResponseRedirect('/login/')
 
 def delete(request, id):
-    blog = Blogs.objects.get(id=id) 
-    blog.delete()
-    messages.success(request, "Your blog has been deleted")
-    return redirect('read') 
+    if request.user.is_authenticated:
+        blog = Blogs.objects.get(id=id) 
+        blog.delete()
+        messages.success(request, "Your blog has been deleted")
+        return redirect('read') 
+    else:
+        return HttpResponseRedirect('/login/')
 
 def update(request,id):
-    blog = Blogs.objects.get(id=id)
-    if request.method == "POST":
-        title = request.POST.get('title')
-        subtitle = request.POST.get('subtitle')
-        description = request.POST.get('description')
-        image = request.FILES.get('image')
-        blog.title = title
-        blog.subtitle = subtitle
-        blog.description = description
+    if request.user.is_authenticated:
+        blog = Blogs.objects.get(id=id)
+        if request.method == "POST":
+            title = request.POST.get('title')
+            subtitle = request.POST.get('subtitle')
+            description = request.POST.get('description')
+            image = request.FILES.get('image')
+            blog.title = title
+            blog.subtitle = subtitle
+            blog.description = description
 
-        if image:
-            blog.image = image
+            if image:
+                blog.image = image
         
-        blog.save()
-        messages.success(request, "Your blog has successfully updated")
-        return redirect('read')
+            blog.save()
+            messages.success(request, "Your blog has successfully updated")
+            return redirect('read')
 
-    context = {'blogs':blog}
-    return render(request, 'update.html', context)
+        context = {'blogs':blog}
+        return render(request, 'update.html', context)
+    else:
+        return redirect('login')
