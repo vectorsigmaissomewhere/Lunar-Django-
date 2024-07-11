@@ -76,6 +76,7 @@ def signin(request):
 
 def user_logout(request):
     logout(request)
+    messages.success(request, "You have logged out successfully")
     return HttpResponseRedirect('/login/')
 
 

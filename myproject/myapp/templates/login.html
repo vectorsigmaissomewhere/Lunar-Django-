@@ -11,6 +11,13 @@
     </style>
 </head>
 <body>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     <form action="" method="POST" novalidate>
         {% csrf_token %}
         {% if form.non_field_errors %}
