@@ -31,6 +31,7 @@ def create(request):
                 blog = form.save(commit=False)
                 blog.user = request.user
                 blog.save()
+                messages.success(request, "Your Blog has been created")
                 return redirect('create')
         else:
             form = BlogForm()
@@ -82,7 +83,8 @@ def read(request):
     if request.user.is_authenticated:
         if request.method == "GET":
             user = request.user
-            queryset = Blogs.objects.filter(user=user)
+            # queryset = Blogs.objects.filter(user=user) # fetch the data of the current user 
+            queryset = Blogs.objects.all() 
             context = {'blogs': queryset}
             return render(request,'read.html',context)
     else:
@@ -90,33 +92,45 @@ def read(request):
 
 def delete(request, id):
     if request.user.is_authenticated:
-        blog = Blogs.objects.get(id=id) 
-        blog.delete()
-        messages.success(request, "Your blog has been deleted")
-        return redirect('read') 
+        blog_id = Blogs.objects.get(id=id)
+        user_id = blog_id.user_id
+        if request.user.id == user_id: # this statement will not let your delete other people's blog
+            blog = Blogs.objects.get(id=id) 
+            blog.delete()
+            messages.success(request, "Your blog has been deleted")
+            return redirect('read') 
+        else:
+            messages.success(request,"Sorry, You cannot delete other user blog")
+            return redirect('read')
     else:
         return HttpResponseRedirect('/login/')
 
 def update(request,id):
     if request.user.is_authenticated:
-        blog = Blogs.objects.get(id=id)
-        if request.method == "POST":
-            title = request.POST.get('title')
-            subtitle = request.POST.get('subtitle')
-            description = request.POST.get('description')
-            image = request.FILES.get('image')
-            blog.title = title
-            blog.subtitle = subtitle
-            blog.description = description
+        blog_id = Blogs.objects.get(id=id)
+        user_id = blog_id.user_id
+        if request.user.id == user_id: # this statement will not let you update other people's blog 
+            blog = Blogs.objects.get(id=id) 
+            if request.method == "POST":
+                title = request.POST.get('title')
+                subtitle = request.POST.get('subtitle')
+                description = request.POST.get('description')
+                image = request.FILES.get('image')
+                blog.title = title
+                blog.subtitle = subtitle
+                blog.description = description
 
-            if image:
-                blog.image = image
+                if image:
+                    blog.image = image
         
-            blog.save()
-            messages.success(request, "Your blog has successfully updated")
-            return redirect('read')
+                blog.save()
+                messages.success(request, "Your blog has successfully updated")
+                return redirect('read')
 
-        context = {'blogs':blog}
-        return render(request, 'update.html', context)
+            context = {'blogs':blog}
+            return render(request, 'update.html', context)
+        else:
+            messages.success(request, "Sorry, You cannot update other user blog")
+            return redirect('read')
     else:
         return redirect('login')
