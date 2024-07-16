@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <button>History</button>
+    <form action="post">
+        <input type="text" placeholder="Enter your code" name="searchtext"/>
+        <button type="submit">Search</button>
+    </form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="filename">
+        <button type="submit">Submit</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Code</th>
+                <th scope="col">Ipaddress</th>
+                <th scope="col">Filename</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for somefile in somefiles %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ somefile.code }}</td>
+                <td>{{ somefile.ipaddress }}</td>
+                <td>{{ somefile.file }}</td>
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    <p>Checking</p>
+</body>
+</html>
+
