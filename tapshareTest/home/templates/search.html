@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Item</title>
+</head>
+<body>
+    <form method="GET" action="{% url 'search' %}">
+        <input type="text" name="code" placeholder="Search by Code">
+        <button type="submit">Search</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Code</th>
+                <th scope="col">Ipaddress</th>
+                <th scope="col">File</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for codelist in codelists %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ codelist.code }}</td>
+                <td><a href="{% url 'download_file' codelist.id %}">Download</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
