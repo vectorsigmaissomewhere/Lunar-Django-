@@ -10,6 +10,9 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('search/', views.search, name='search'),
     path('download/<int:file_id>/', views.download_file, name='download_file'),
+    path('read_text/<int:text_id>/', views.read_text, name='read_text'),
+    path('download_text/<int:text_id>/', views.download_text, name='download_text'),
+    path('search_text/', views.search_text, name='search_text'),
 ]
 
 if settings.DEBUG:

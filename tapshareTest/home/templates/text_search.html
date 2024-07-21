@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Text Data</title>
+</head>
+<body>
+    <h1>Search Text Data</h1>
+    <form method="GET" action="{% url 'search_text' %}">
+        <input type="text" name="query" placeholder="Search by Text" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Code</th>
+                <th scope="col">Ipaddress</th>
+                <th scope="col">Text</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for text_item in text_list %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ text_item.code }}</td>
+                <td>{{ text_item.ipaddress }}</td>
+                <td>{{ text_item.text|slice:":50" }}{% if text_item.text|length > 50 %}...{% endif %}</td>
+                <td>
+                    <a href="{% url 'read_text' text_item.code %}">Read</a> |
+                    <a href="{% url 'download_text' text_item.id %}">Download</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No text data found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

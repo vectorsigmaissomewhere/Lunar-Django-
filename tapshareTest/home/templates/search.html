@@ -18,6 +18,7 @@
                 <th scope="col">Code</th>
                 <th scope="col">Ipaddress</th>
                 <th scope="col">File</th>
+                <th scope="col">Text</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +26,21 @@
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ codelist.code }}</td>
-                <td><a href="{% url 'download_file' codelist.id %}">Download</a></td>
+                <td>
+                    {% if codelist.file %}
+                        <a href="{% url 'download_file' codelist.id %}">Download</a>
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>
+                    {% if codelist.text %}
+                        <a href="{% url 'read_text' codelist.id %}">Read</a> |
+                        <a href="{% url 'download_text' codelist.id %}">Download</a>
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
