@@ -1,0 +1,16 @@
+home about products services contact faq login
+
+authentication
+user: username and password for login
+user is registered by admin
+
+
+
+contact 
+name email 
+phone 
+subject
+message
+security code 
+
+
