@@ -9,37 +9,37 @@
 <body>
     <!--Header page-->
     <nav class="bg-gray-50 dark:bg-gray-700">
-        <div class="max-w-screen-xl px-4 py-3 mx-auto">
-            <div class="flex items-center justify-end mr-10">
-                <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                    <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">About</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">Products</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">Services</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">Contact</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">faq</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">Login</a>
-                    </li>
-                    <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">Dashboard</a>
+      <div class="max-w-screen-xl px-4 py-3 mx-auto">
+          <div class="flex items-center justify-end mr-10">
+              <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+                  <li>
+                      <a href="{% url 'home' %}" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a>
                   </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+                  <li>
+                      <a href="#" class="text-gray-900 dark:text-white hover:underline">About</a>
+                  </li>
+                  <li>
+                      <a href="#" class="text-gray-900 dark:text-white hover:underline">Products</a>
+                  </li>
+                  <li>
+                      <a href="#" class="text-gray-900 dark:text-white hover:underline">Services</a>
+                  </li>
+                  <li>
+                      <a href="#" class="text-gray-900 dark:text-white hover:underline">Contact</a>
+                  </li>
+                  <li>
+                      <a href="#" class="text-gray-900 dark:text-white hover:underline">faq</a>
+                  </li>
+                  <li>
+                      <a href="{% url 'login' %}" class="text-gray-900 dark:text-white hover:underline">Login</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'userdashboard'%}" class="text-gray-900 dark:text-white hover:underline">Dashboard</a>
+                </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
     <!--Specific course detail-->
     <div class="flex justify-center items-center">
     <div class="flex flex-col rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white md:max-w-xl md:flex-row">
