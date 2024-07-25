@@ -20,7 +20,7 @@
                         <a href="#products" class="text-gray-900 dark:text-white hover:underline">Products</a>
                     </li>
                     <li>
-                        <a href="#services" class="text-gray-900 dark:text-white hover:underline">Services</a>
+                        <a href="{% url 'allcourse' %}" class="text-gray-900 dark:text-white hover:underline">Courses</a>
                     </li>
                     <li>
                         <a href="#contact" class="text-gray-900 dark:text-white hover:underline">Contact</a>
@@ -475,7 +475,7 @@
         </div>
     </section>
     <!--Contact us page-->
-    <section class="bg-white dark:bg-gray-900">
+    <section class="bg-white dark:bg-gray-900" id="contact">
       <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
           <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
           <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p>
@@ -502,7 +502,7 @@
     </section>
     <!--FAQ Section-->
     <div
-    class="relative w-full bg-white px-6 pt-10 pb-8 mt-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10">
+    class="relative w-full bg-white px-6 pt-10 pb-8 mt-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10" id="faq">
     <div class="mx-auto px-5">
         <div class="flex flex-col items-center">
             <h2 class="mt-5 text-center text-3xl font-bold tracking-tight md:text-5xl">FAQ</h2>

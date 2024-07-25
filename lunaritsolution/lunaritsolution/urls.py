@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from home.views import home, course, specificcourse, userdashboard, enrolledcourse, certificate, user_login
+from home.views import home, course, specificcourse, userdashboard, enrolledcourse, certificate, user_login, allCourse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -11,4 +11,5 @@ urlpatterns = [
     path('enrolledcourse/',enrolledcourse, name='enrolledcourse'),
     path('certificate/', certificate, name='certificate'),
     path('login/',user_login, name='login'),
+    path('allcourse/',allCourse, name='allcourse'),
 ]

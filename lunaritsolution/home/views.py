@@ -21,6 +21,9 @@ def enrolledcourse(request):
 def certificate(request):
     return render(request, 'certificate.html')
 
+def allCourse(request):
+    return render(request, 'allcourses.html')
+
 def user_login(request):
     if not request.user.is_authenticated:
         if request.method == "POST":
