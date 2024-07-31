@@ -13,53 +13,54 @@
           <div class="flex items-center justify-end mr-10">
               <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
                   <li>
-                      <a href="{% url 'home' %}" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a>
+                    <a href="{% url 'home' %}" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a>
                   </li>
                   <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">About</a>
+                      <a href="/home/#about" class="text-gray-900 dark:text-white hover:underline">About</a>
                   </li>
                   <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">Products</a>
+                      <a href="/home/#products" class="text-gray-900 dark:text-white hover:underline">Products</a>
                   </li>
                   <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">Services</a>
+                      <a href="{% url 'course' %}" class="text-gray-900 dark:text-white hover:underline">Courses</a>
                   </li>
                   <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">Contact</a>
+                      <a href="/home/#contact" class="text-gray-900 dark:text-white hover:underline">Contact</a>
                   </li>
                   <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">faq</a>
+                      <a href="/home/#faq" class="text-gray-900 dark:text-white hover:underline">faq</a>
                   </li>
                   <li>
                       <a href="{% url 'login' %}" class="text-gray-900 dark:text-white hover:underline">Login</a>
                   </li>
                   <li>
-                    <a href="{% url 'userdashboard'%}" class="text-gray-900 dark:text-white hover:underline">Dashboard</a>
+                    <a href="{% url 'logout' %}" class="text-gray-900 dark:text-white hover:underline">Logout</a>
+                </li>
+                  <li>
+                    <a href="{% url 'userdashboard' %}" class="text-gray-900 dark:text-white hover:underline">Dashboard</a>
                 </li>
               </ul>
           </div>
       </div>
   </nav>
-    <!--Specific course detail-->
-    <div class="flex justify-center items-center">
-    <div class="flex flex-col rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white md:max-w-xl md:flex-row">
-  <img
-    class="h-96 w-full rounded-t-lg object-cover md:h-auto md:w-48 md:!rounded-none md:!rounded-s-lg"
-    src="https://tecdn.b-cdn.net/wp-content/uploads/2020/06/vertical.jpg"
-    alt="" />
-  <div class="flex flex-col justify-start p-6">
-    <h5 class="mb-2 text-xl font-medium">Django Development</h5>
-    <p class="mb-4 text-base">
-      This is a wider card with supporting text below as a natural lead-in
-      to additional content. This content is a little bit longer.
-    </p>
-    <p class="text-xs text-surface/75 dark:text-neutral-300">
-      Last updated 3 mins ago
-    </p>
-  </div>
-</div>
-</div>
 
+    <!--Specific course detail-->
+    <div class="flex justify-center items-center py-8">
+      <div class="flex flex-col rounded-lg bg-white shadow-lg dark:bg-gray-800 dark:text-white md:max-w-2xl md:flex-row">
+        <img
+          class="h-64 w-full rounded-t-lg object-cover md:h-auto md:w-64 md:rounded-none md:rounded-l-lg"
+          src="{{ onecourse.image.url }}"
+          alt="{{ onecourse.coursename }}" />
+        <div class="flex flex-col justify-start p-8">
+          <h5 class="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">{{ onecourse.coursename }}</h5>
+          <p class="mb-6 text-gray-700 dark:text-gray-300">{{ onecourse.description }}</p>
+          <p class="mb-4 text-lg font-bold text-gray-900 dark:text-white">Rs. {{ onecourse.price }}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Last updated 3 mins ago</p>
+          <button type="button" class="bg-sky-500 text-black py-2 px-4 rounded-md hover:bg-purple-600 transition-colors duration-300">Enroll Now</button>
+        </div>
+      </div>
+    </div>
+  
 <!--Footer Section-->
 <div class="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
     <div class="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">

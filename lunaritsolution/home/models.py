@@ -8,7 +8,13 @@ class Courses(models.Model):
 
     def str(self):
         return self.coursename
-    
 
+class ContactUs(models.Model):
+    fullname = models.CharField(max_length=100)
+    email = models.CharField(max_length=150)
+    phonenumber = models.CharField(max_length=10)
+    message = models.TextField()
 
+    def str(self):
+        return self.fullname
     

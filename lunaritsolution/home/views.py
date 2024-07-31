@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth.forms import AuthenticationForm # login form
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from .models import Courses
+from .models import Courses,ContactUs
 
 def home(request):
     return render(request,'home.html')
@@ -49,6 +49,26 @@ def user_logout(request):
     logout(request)
     messages.success(request, 'Logged out successfully !!')
     return redirect('home')
+
+
+# views for contact us 
+def contact(request):
+    if request.method == 'POST':
+        fullname = request.POST.get('fullname')
+        email = request.POST.get('emailaddress')
+        phonenumber = request.POST.get('phonenumber')
+        message = request.POST.get('message')
+        contactmodel = ContactUs(fullname=fullname, email=email, phonenumber=phonenumber, message=message)
+        messages.success(request, 'You have successfully sent the message')
+        contactmodel.save()
+        return redirect('/home/')
+    else:
+        messages.success(request, "please try again")
+        return redirect('/home/')
+    
+
+    
+
 
 
 """

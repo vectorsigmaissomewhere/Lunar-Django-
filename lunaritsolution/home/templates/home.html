@@ -6,13 +6,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-  {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-      {{ message }}
-    {% endfor %}
-</ul>
-{% endif %}
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const contactMessages = document.querySelectorAll(".contact-message");
+    if(contactMessages!='')
+    contactMessages.forEach(message => {
+      alert(message.textContent);
+    });
+  });
+</script>
+
+  </script>
     <nav class="bg-gray-50 dark:bg-gray-700">
         <div class="max-w-screen-xl px-4 py-3 mx-auto">
             <div class="flex items-center justify-end mr-10">
@@ -183,30 +187,18 @@
               <h3 class="text-lg font-semibold group-hover:text-white">Lunar School Management Software</h3>
             </div>
             <p class="text-slate-700/70 text-base group-hover:text-white">Single system containing accounting, library, examination, all total school information system. It is a desktop/web application available at minimal cost with enterprise quality and easy to use philosophy.</p>
-            <div class="flex items-center justify-between pt-5 w-full">
-              <p class="bg-[#E0F7F6] px-2 py-0.5 text-sm rounded border border-cyan-500 hover:bg-purple-500 hover:text-white">30 classes</p>
-              <p class="bg-gray-200 px-2 py-0.5 text-sm rounded border border-gray-300 hover:bg-purple-500 hover:text-white">2 months</p>
-            </div>
           </div>
           <div class="group grid grid-rows-1 p-5 bg-white rounded-xl gap-y-2 w-full border border-slate-500/50 hover:shadow-[5px_5px_0_rgba(0,0,0,0.5)] transition-shadow duration-150 ease-linear cursor-pointer hover:bg-sky-700">
             <div class="flex flex-col gap-y-2.5">
               <h3 class="text-lg font-semibold group-hover:text-white">Lunaccount (Cooperative Software)</h3>
             </div>
             <p class="text-slate-700/70 text-base group-hover:text-white">Cooperative Management System</p>
-            <div class="flex items-center justify-between pt-5 w-full">
-              <p class="bg-[#E0F7F6] px-2 py-0.5 text-sm rounded border border-cyan-500 hover:bg-purple-500 hover:text-white">20 classes</p>
-              <p class="bg-gray-200 px-2 py-0.5 text-sm rounded border border-gray-300 hover:bg-purple-500 hover:text-white">1.5 months</p>
-            </div>
           </div>
           <div class="group grid grid-rows-1 p-5 bg-white rounded-xl gap-y-2 w-full border border-slate-500/50 hover:shadow-[5px_5px_0_rgba(0,0,0,0.5)] transition-shadow duration-150 ease-linear cursor-pointer hover:bg-sky-700">
             <div class="flex flex-col gap-y-2.5">
               <h3 class="text-lg font-semibold group-hover:text-white">Word Processing Software</h3>
             </div>
             <p class="text-slate-700/70 text-base group-hover:text-white">Word Processing refers to the act of using a personal computer (PC) or laptop to create, edit, save and print documents which can be performed only with specialized software known as a Word Processor. One example of a Word Processor is Microsoft Word which is widely used by all professionals.</p>
-            <div class="flex items-center justify-between pt-5 w-full">
-              <p class="bg-[#E0F7F6] px-2 py-0.5 text-sm rounded border border-cyan-500 hover:bg-purple-500 hover:text-white">25 classes</p>
-              <p class="bg-gray-200 px-2 py-0.5 text-sm rounded border border-gray-300 hover:bg-purple-500 hover:text-white">2 months</p>
-            </div>
           </div>
         </div>
       </div>
@@ -273,7 +265,7 @@
       </div>
     </div>
     <div class="flex justify-end my-10 text-white">
-      <button class="p-4 bg-blue-500 rounded shadow-md hover:bg-purple-500">View all Courses</button>
+      <a href="{% url 'course' %}"><button class="p-4 bg-blue-500 rounded shadow-md hover:bg-purple-500" >View all Courses</button></a>
     </div>
   </div>
 </section>
@@ -485,28 +477,36 @@
         </div>
     </section>
     <!--Contact us page-->
+    {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="contact-message" style="display: none;">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
     <section class="bg-white dark:bg-gray-900" id="contact">
       <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
           <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
           <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p>
-          <form action="#" class="space-y-8">
+          <form action="{% url 'contactform' %}" class="space-y-8" method="post">
+            {% csrf_token %}
             <div>
               <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your Name</label>
-              <input type="text" id="subject" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Enter your Name" required>
+              <input name="fullname" type="text" id="subject" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Enter your Name" required>
             </div>
               <div>
                   <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
-                  <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="name@flowbite.com" required>
+                  <input name="emailaddress" type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="name@flowbite.com" required>
               </div>
               <div>
                 <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Phone</label>
-                <input type="text" id="subject" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Enter your Phone Number" required>
+                <input name="phonenumber" type="text" id="subject" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Enter your Phone Number" required>
               </div>
               <div class="sm:col-span-2">
                   <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
-                  <textarea id="message" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Leave a comment..."></textarea>
+                  <textarea name="message" id="message" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Leave a comment..."></textarea>
               </div>
-              <button type="submit" class="py-3 px-5 text-sm font-medium text-center text-dark-grey-900 rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 bg-purple-blue-500">Send message</button>
+              <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Send Message</button>
           </form>
       </div>
     </section>
