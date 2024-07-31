@@ -20,28 +20,31 @@
             <div class="flex items-center justify-end mr-10">
                 <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
                     <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a>
+                      <a href="{% url 'home' %}" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">About</a>
+                        <a href="/home/#about" class="text-gray-900 dark:text-white hover:underline">About</a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">Products</a>
+                        <a href="/home/#products" class="text-gray-900 dark:text-white hover:underline">Products</a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">Services</a>
+                        <a href="{% url 'course' %}" class="text-gray-900 dark:text-white hover:underline">Courses</a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">Contact</a>
+                        <a href="/home/#contact" class="text-gray-900 dark:text-white hover:underline">Contact</a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">faq</a>
+                        <a href="/home/#faq" class="text-gray-900 dark:text-white hover:underline">faq</a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-900 dark:text-white hover:underline">Login</a>
+                        <a href="{% url 'login' %}" class="text-gray-900 dark:text-white hover:underline">Login</a>
                     </li>
                     <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">Dashboard</a>
+                      <a href="{% url 'logout' %}" class="text-gray-900 dark:text-white hover:underline">Logout</a>
+                  </li>
+                    <li>
+                      <a href="{% url 'userdashboard' %}" class="text-gray-900 dark:text-white hover:underline">Dashboard</a>
                   </li>
                 </ul>
             </div>
@@ -52,71 +55,24 @@
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-8">Introducing our Latest Courses</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8e gap-x-20 gap-y-20">
-                <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                    <div class="relative overflow-hidden">
-                        <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                        <div class="absolute inset-0 bg-black opacity-40"></div>
-                        <div class="absolute inset-0 flex items-center justify-center button-container">
-                            <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View More</button>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mt-4">Django</h3>
-                    <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                        ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                    <div class="flex items-center justify-between mt-4">
-                        <span class="text-gray-900 font-bold text-lg">$29.99</span>
-                        <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Enroll Now</button>
-                    </div>
-                </div>
-                <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                    <div class="relative overflow-hidden">
-                        <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                        <div class="absolute inset-0 bg-black opacity-40"></div>
-                        <div class="absolute inset-0 flex items-center justify-center button-container">
-                            <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View More</button>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mt-4">MERN Stack</h3>
-                    <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                        ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                    <div class="flex items-center justify-between mt-4">
-                        <span class="text-gray-900 font-bold text-lg">$29.99</span>
-                        <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Enroll Now</button>
-                    </div>
-                </div>
-                <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                    <div class="relative overflow-hidden">
-                        <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                        <div class="absolute inset-0 bg-black opacity-40"></div>
-                        <div class="absolute inset-0 flex items-center justify-center button-container">
-                            <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View More</button>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mt-4">.NET</h3>
-                    <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                        ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                    <div class="flex items-center justify-between mt-4">
-                        <span class="text-gray-900 font-bold text-lg">$29.99</span>
-                        <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Enroll Now</button>
-                    </div>
-                </div>
                 <!--adding more  grid-->
+                {% for x in courses %}
                 <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
                     <div class="relative overflow-hidden">
-                        <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
+                        <img class="object-cover w-full h-full" src="{{ x.image.url }}" alt="Product">
                         <div class="absolute inset-0 bg-black opacity-40"></div>
                         <div class="absolute inset-0 flex items-center justify-center button-container">
-                            <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View More</button>
+                            <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300" href="{% url 'specificcourse' x.id %}">View More</button>
                         </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mt-4">Spring Boot</h3>
-                    <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                        ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
+                    <h3 class="text-xl font-bold text-gray-900 mt-4">{{ x.coursename }}</h3>
+                    <p class="text-gray-500 text-sm mt-2">{{ x.description|truncatewords:20 }}</p>
                     <div class="flex items-center justify-between mt-4">
-                        <span class="text-gray-900 font-bold text-lg">$29.99</span>
+                        <span class="text-gray-900 font-bold text-lg">${{ x.price }}</span>
                         <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Enroll Now</button>
                     </div>
                 </div>
+                {% endfor %}
                 <!-- end of the grid-->
             </div>
         </div>

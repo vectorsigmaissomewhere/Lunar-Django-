@@ -1,16 +1,19 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth.forms import AuthenticationForm # login form
 from django.contrib import messages
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
+from .models import Courses
 
 def home(request):
     return render(request,'home.html')
 
 def course(request):
-    return render(request, 'course.html')
+    courses = Courses.objects.all()
+    return render(request, 'course.html', {'courses':courses})
 
-def specificcourse(request):
-    return render(request, 'specificcourse.html')
+def specificcourse(request,id):
+    onecourse = Courses.objects.get(id=id)
+    return render(request, 'specificcourse.html',{'onecourse':onecourse})
 
 def userdashboard(request):
     return render(request, 'userdashboard.html')
@@ -41,6 +44,22 @@ def user_login(request):
         return render(request, 'userlogin.html',{'form':fm})
     else:
         return HttpResponseRedirect('/home/')
+    
+def user_logout(request):
+    logout(request)
+    messages.success(request, 'Logged out successfully !!')
+    return redirect('home')
 
+
+"""
+    # Fetch all MusicalEvent objects
+    musical_events = MusicalEvent.objects.all()
+    # searching for specific district
+    if 'district' in request.GET:
+        district = request.GET['district']
+        musical_events = musical_events.filter(district__icontains=district)    
+    return render(request, 'index.html', {'musical_events': musical_events})
+
+"""
 
 

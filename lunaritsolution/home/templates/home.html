@@ -6,6 +6,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+  {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}
+</ul>
+{% endif %}
     <nav class="bg-gray-50 dark:bg-gray-700">
         <div class="max-w-screen-xl px-4 py-3 mx-auto">
             <div class="flex items-center justify-end mr-10">
@@ -20,7 +27,7 @@
                         <a href="#products" class="text-gray-900 dark:text-white hover:underline">Products</a>
                     </li>
                     <li>
-                        <a href="{% url 'allcourse' %}" class="text-gray-900 dark:text-white hover:underline">Courses</a>
+                        <a href="{% url 'course' %}" class="text-gray-900 dark:text-white hover:underline">Courses</a>
                     </li>
                     <li>
                         <a href="#contact" class="text-gray-900 dark:text-white hover:underline">Contact</a>
@@ -31,6 +38,9 @@
                     <li>
                         <a href="{% url 'login' %}" class="text-gray-900 dark:text-white hover:underline">Login</a>
                     </li>
+                    <li>
+                      <a href="{% url 'logout' %}" class="text-gray-900 dark:text-white hover:underline">Logout</a>
+                  </li>
                     <li>
                       <a href="{% url 'userdashboard'%}" class="text-gray-900 dark:text-white hover:underline">Dashboard</a>
                   </li>
