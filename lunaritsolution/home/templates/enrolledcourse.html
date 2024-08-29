@@ -93,72 +93,31 @@
         <div class="bg-white py-16">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-bold mb-8">Enrolled Courses</h2>
+                {% if messages %}
+                  <ul class="messages">
+                  {% for message in messages %}
+                  <li{% if message.tags %} class="{{ message.tags }} text-rose-600"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+                {% if enrollments %}
+                {% for enrollment in enrollments %}
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8e gap-x-20 gap-y-20">
                     <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
                         <div class="relative overflow-hidden">
-                            <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
+                          <img class="object-cover w-full h-full" src="{{ enrollment.course.image.url }}" alt="Product">
                             <div class="absolute inset-0 bg-black opacity-40"></div>
                             <div class="absolute inset-0 flex items-center justify-center button-container">
-                                <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View More</button>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mt-4">Django</h3>
-                        <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                            ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mt-4">{{ enrollment.course.coursename }}</h3>
                         <div class="flex items-center justify-between mt-4">
-                            <span class="text-gray-900 font-bold text-lg">$29.99</span>
-                            <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Enroll Now</button>
+                            <span class="text-gray-900 font-bold text-lg">{{ enrollment.enrollment_date }}</span>
                         </div>
+                        <a href="{% url 'removeenroll' enrollment.id %}"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Remove Enrollment</button></a>
                     </div>
-                    <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                        <div class="relative overflow-hidden">
-                            <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                            <div class="absolute inset-0 bg-black opacity-40"></div>
-                            <div class="absolute inset-0 flex items-center justify-center button-container">
-                                <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View More</button>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mt-4">MERN Stack</h3>
-                        <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                            ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-gray-900 font-bold text-lg">$29.99</span>
-                            <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Enroll Now</button>
-                        </div>
-                    </div>
-                    <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                        <div class="relative overflow-hidden">
-                            <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                            <div class="absolute inset-0 bg-black opacity-40"></div>
-                            <div class="absolute inset-0 flex items-center justify-center button-container">
-                                <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View More</button>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mt-4">.NET</h3>
-                        <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                            ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-gray-900 font-bold text-lg">$29.99</span>
-                            <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Enroll Now</button>
-                        </div>
-                    </div>
-                    <!--adding more  grid-->
-                    <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                        <div class="relative overflow-hidden">
-                            <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                            <div class="absolute inset-0 bg-black opacity-40"></div>
-                            <div class="absolute inset-0 flex items-center justify-center button-container">
-                                <button class="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300">View More</button>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mt-4">Spring Boot</h3>
-                        <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                            ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-gray-900 font-bold text-lg">$29.99</span>
-                            <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Enroll Now</button>
-                        </div>
-                    </div>
+                    {% endfor %}
+                    {% endif %}
         <!--Certificates-->
               
     </div>

@@ -2,7 +2,8 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth.forms import AuthenticationForm # login form
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from .models import Courses,ContactUs
+from .models import Courses,ContactUs, EnrollStudent
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request,'home.html')
@@ -18,8 +19,10 @@ def specificcourse(request,id):
 def userdashboard(request):
     return render(request, 'userdashboard.html')
 
+@login_required
 def enrolledcourse(request):
-    return render(request, 'enrolledcourse.html')
+    enrollments = EnrollStudent.objects.filter(user=request.user)
+    return render(request, 'enrolledcourse.html', {'enrollments': enrollments})
 
 def certificate(request):
     return render(request, 'certificate.html')
@@ -66,8 +69,26 @@ def contact(request):
         messages.success(request, "please try again")
         return redirect('/home/')
     
+# when user clicks on enroll course
+@login_required
+def enroll(request, id):
+    course = Courses.objects.get(id=id)
+    user = request.user
+    enrollment, created = EnrollStudent.objects.get_or_create(user=user, course=course)
+    if created:
+        messages.success(request, f"You have successfully enrolled in {course.coursename}!")
+    else:
+        messages.info(request, f"You are already enrolled in {course.coursename}.")
+    return redirect('userdashboard')
 
-    
+@login_required
+def removeenroll(request, id):
+    removeenrollobj = EnrollStudent.objects.get(id=id)
+    removeenrollobj.delete()
+    messages.success(request, "Successfully removed from the enrollment")
+    return redirect('/enrolledcourse/')
+
+
 
 
 

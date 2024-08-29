@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from home.views import home, course, specificcourse, userdashboard, enrolledcourse, certificate, user_login, allCourse, user_logout, contact
+from home.views import home, course, specificcourse, userdashboard, enrolledcourse, certificate, user_login, allCourse, user_logout, contact, enroll, removeenroll
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -16,4 +16,6 @@ urlpatterns = [
     path('logout/', user_logout, name='logout'),
     path('allcourse/',allCourse, name='allcourse'),
     path('contactform/', contact, name='contactform'),
+    path('enroll/<int:id>/', enroll, name='enroll'),
+    path('removeenroll/<int:id>/', removeenroll, name='removeenroll')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

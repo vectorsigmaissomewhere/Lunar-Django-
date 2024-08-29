@@ -15,8 +15,6 @@
     });
   });
 </script>
-
-  </script>
     <nav class="bg-gray-50 dark:bg-gray-700">
         <div class="max-w-screen-xl px-4 py-3 mx-auto">
             <div class="flex items-center justify-end mr-10">
@@ -39,9 +37,12 @@
                     <li>
                         <a href="#faq" class="text-gray-900 dark:text-white hover:underline">faq</a>
                     </li>
+                    {% if request.user.is_authenticated %}
+                    {% else %}
                     <li>
                         <a href="{% url 'login' %}" class="text-gray-900 dark:text-white hover:underline">Login</a>
                     </li>
+                    {% endif %}
                     <li>
                       <a href="{% url 'logout' %}" class="text-gray-900 dark:text-white hover:underline">Logout</a>
                   </li>
