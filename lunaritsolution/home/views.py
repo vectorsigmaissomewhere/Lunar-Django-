@@ -13,7 +13,7 @@ def course(request):
     return render(request, 'course.html', {'courses':courses})
 
 def specificcourse(request,id):
-    onecourse = Courses.objects.get(id=id)
+    onecourse = Courses.objects.get(id=id) 
     return render(request, 'specificcourse.html',{'onecourse':onecourse})
 
 def userdashboard(request):
@@ -81,26 +81,12 @@ def enroll(request, id):
         messages.info(request, f"You are already enrolled in {course.coursename}.")
     return redirect('userdashboard')
 
+# This view is used to remove the enrollment 
 @login_required
 def removeenroll(request, id):
     removeenrollobj = EnrollStudent.objects.get(id=id)
     removeenrollobj.delete()
     messages.success(request, "Successfully removed from the enrollment")
     return redirect('/enrolledcourse/')
-
-
-
-
-
-"""
-    # Fetch all MusicalEvent objects
-    musical_events = MusicalEvent.objects.all()
-    # searching for specific district
-    if 'district' in request.GET:
-        district = request.GET['district']
-        musical_events = musical_events.filter(district__icontains=district)    
-    return render(request, 'index.html', {'musical_events': musical_events})
-
-"""
 
 
