@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -92,35 +91,22 @@
         <!-- Enrolled Courses--->
         <div class="bg-white py-16">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold mb-8">Enrolled Courses</h2>
-                {% if messages %}
-                  <ul class="messages">
-                  {% for message in messages %}
-                  <li{% if message.tags %} class="{{ message.tags }} text-rose-600"{% endif %}>{{ message }}</li>
-                {% endfor %}
+                <h2 class="text-3xl font-bold mb-8 text-blue-600">Playing {{ coursename }}</h2>
                 </ul>
-                {% endif %}
-                {% if enrollments %}
-                {% for enrollment in enrollments %}
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8e gap-x-20 gap-y-20">
-                    <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                        <div class="relative overflow-hidden">
-                          <img class="object-cover w-full h-full" src="{{ enrollment.course.image.url }}" alt="Product">
-                            <div class="absolute inset-0 bg-black opacity-40"></div>
-                            <div class="absolute inset-0 flex items-center justify-center button-container">
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mt-4">{{ enrollment.course.coursename }}</h3>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-gray-900 font-bold text-lg">{{ enrollment.enrollment_date }}</span>
-                        </div>
-                        <a href="{% url 'watchvideo' enrollment.course.id %}"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mx-10 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Watch Video</button></a>
-                        <a href="{% url 'removeenroll' enrollment.id %}"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mx-5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Remove Enrollment</button></a>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-        <!--Certificates-->
-              
+                {% if coursevideo %}
+                <video width="600" controls>
+                    <source src="{{ coursevideo.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% else %}
+                <p>No video available.</p>
+            {% endif %}            
+        <!--Certificates-->  
+        <a href="{% url 'quizsection'%}">
+          <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 mt-5 ml-80">
+              Test For Certificate
+          </button>
+      </a>
     </div>
     <!--footer section-->
     <div class="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">

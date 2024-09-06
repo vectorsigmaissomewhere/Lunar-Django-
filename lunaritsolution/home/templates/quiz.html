@@ -2,48 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ensure the main content takes up the remaining space between header and footer */
+        .flex-1 {
+            flex: 1;
+        }
+    </style>
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
     <!--header section-->
     <nav class="bg-gray-50 dark:bg-gray-700">
-      <div class="max-w-screen-xl px-4 py-3 mx-auto">
-          <div class="flex items-center justify-end mr-10">
-              <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
-                  <li>
-                      <a href="{% url 'home' %}" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a>
-                  </li>
-                  <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">About</a>
-                  </li>
-                  <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">Products</a>
-                  </li>
-                  <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">Services</a>
-                  </li>
-                  <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">Contact</a>
-                  </li>
-                  <li>
-                      <a href="#" class="text-gray-900 dark:text-white hover:underline">faq</a>
-                  </li>
-                  <li>
-                      <a href="{% url 'login' %}" class="text-gray-900 dark:text-white hover:underline">Login</a>
-                  </li>
-                  <li>
-                    <a href="{% url 'userdashboard'%}" class="text-gray-900 dark:text-white hover:underline">Dashboard</a>
-                </li>
-              </ul>
-          </div>
-      </div>
-  </nav>
+        <div class="max-w-screen-xl px-4 py-3 mx-auto">
+            <div class="flex items-center justify-end mr-10">
+                <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+                    <li><a href="{% url 'home' %}" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a></li>
+                    <li><a href="#" class="text-gray-900 dark:text-white hover:underline">About</a></li>
+                    <li><a href="#" class="text-gray-900 dark:text-white hover:underline">Products</a></li>
+                    <li><a href="#" class="text-gray-900 dark:text-white hover:underline">Services</a></li>
+                    <li><a href="#" class="text-gray-900 dark:text-white hover:underline">Contact</a></li>
+                    <li><a href="#" class="text-gray-900 dark:text-white hover:underline">FAQ</a></li>
+                    <li><a href="{% url 'login' %}" class="text-gray-900 dark:text-white hover:underline">Login</a></li>
+                    <li><a href="{% url 'userdashboard' %}" class="text-gray-900 dark:text-white hover:underline">Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <!--main section-->
-    <div class="flex h-screen bg-gray-100">
-
+    <div class="flex flex-1 bg-gray-100">
         <!-- sidebar -->
         <div class="hidden md:flex flex-col w-64 bg-gray-800">
             <div class="flex items-center justify-center h-16 bg-gray-900">
@@ -52,26 +40,20 @@
             <div class="flex flex-col flex-1 overflow-y-auto">
                 <nav class="flex-1 px-2 py-4 bg-gray-800">
                     <a href="{% url 'userdashboard' %}" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                         Dashboard
                     </a>
-                    <a href="{% url 'enrolledcourse'%}" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
+                    <a href="{% url 'enrolledcourse' %}" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                         Enrolled Courses
                     </a>
                     <a href="{% url 'certificate' %}" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                         Certificate
                     </a>
@@ -80,47 +62,39 @@
         </div>
     
         <!-- Main content -->
-         <!--Here will be the button dashboard-->
-         <!--
-        <div class="flex flex-col flex-1 overflow-y-auto">
-            <div class="p-4">
-                <h1 class="text-2xl font-bold">Welcome to my dashboard!</h1>
-                <p class="mt-2 text-gray-600">Check our dashbaord.</p>
+        <div class="flex-1 p-6">
+            <!-- Enrolled Courses -->
+            <div class="bg-white py-16">
+                <h3 class="text-2xl font-bold mb-6 text-center">Lunar IT Solution</h3>
+                <form id="quizForm" class="space-y-4">
+                    <!-- Question 1 -->
+                    {% for question in questions %}
+                    <div class="flex flex-col mb-4">
+                        <label for="q1" class="text-lg text-gray-800 mb-2">{{ question.question }}</label>
+                        {% for option in question.options.all %}
+                        <div class="flex items-center space-x-4">
+                            <input type="radio" id="q1a" name="q1" value="a" class="mr-2" required>
+                            <label for="q1a" class="text-gray-700">a) {{ option.option1 }}</label>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <input type="radio" id="q1b" name="q1" value="b" class="mr-2" required>
+                            <label for="q1b" class="text-gray-700">b) {{ option.option2 }}</label>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <input type="radio" id="q1c" name="q1" value="c" class="mr-2" required>
+                            <label for="q1c" class="text-gray-700">c) {{ option.option3 }}</label>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <input type="radio" id="q1d" name="q1" value="d" class="mr-2" required>
+                            <label for="q1d" class="text-gray-700">d) {{ option.option4 }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor }
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Submit</button>
+                </form>
             </div>
         </div>
-    -->
-        <!-- Enrolled Courses--->
-        <div class="bg-white py-16">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold mb-8">Enrolled Courses</h2>
-                {% if messages %}
-                  <ul class="messages">
-                  {% for message in messages %}
-                  <li{% if message.tags %} class="{{ message.tags }} text-rose-600"{% endif %}>{{ message }}</li>
-                {% endfor %}
-                </ul>
-                {% endif %}
-                {% if enrollments %}
-                {% for enrollment in enrollments %}
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8e gap-x-20 gap-y-20">
-                    <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                        <div class="relative overflow-hidden">
-                          <img class="object-cover w-full h-full" src="{{ enrollment.course.image.url }}" alt="Product">
-                            <div class="absolute inset-0 bg-black opacity-40"></div>
-                            <div class="absolute inset-0 flex items-center justify-center button-container">
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mt-4">{{ enrollment.course.coursename }}</h3>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-gray-900 font-bold text-lg">{{ enrollment.enrollment_date }}</span>
-                        </div>
-                        <a href="{% url 'watchvideo' enrollment.course.id %}"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mx-10 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Watch Video</button></a>
-                        <a href="{% url 'removeenroll' enrollment.id %}"><button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mx-5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Remove Enrollment</button></a>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-        <!--Certificates-->
-              
     </div>
     <!--footer section-->
     <div class="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">

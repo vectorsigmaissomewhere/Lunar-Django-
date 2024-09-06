@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth.forms import AuthenticationForm # login form
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from .models import Courses,ContactUs, EnrollStudent
+from .models import Courses,ContactUs, EnrollStudent, QuizQuestion
 from django.contrib.auth.decorators import login_required
 
 def home(request):
@@ -89,4 +89,24 @@ def removeenroll(request, id):
     messages.success(request, "Successfully removed from the enrollment")
     return redirect('/enrolledcourse/')
 
+@login_required
+def watchvideo(request, id):
+    try:
+        course = Courses.objects.get(id=id)
+        coursevideo = course.video 
+        coursename = course.coursename
+    except Courses.DoesNotExist:
+        messages.error(request, "Course not found.")
+        return redirect('enrolledcourse')
+    return render(request, 'watchcourse.html', {'coursevideo': coursevideo, 'coursename': coursename})
 
+"""
+@login_required
+def quizsection(request, coursename):
+    questions = QuizQuestion.objects.filter(course=coursename)
+    return render(request, 'quiz.html', {'questions': questions})
+"""
+
+@login_required
+def quizsection(request):
+    return render(request, 'testing.html')

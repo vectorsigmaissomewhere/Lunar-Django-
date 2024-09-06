@@ -5,6 +5,7 @@ class Courses(models.Model):
     coursename=models.CharField(max_length=100)
     description=models.TextField()
     image=models.ImageField(upload_to='courseImage/')
+    video = models.FileField(upload_to='courseVideo/', default='null')
     price=models.IntegerField()
 
     def str(self):
@@ -27,3 +28,21 @@ class EnrollStudent(models.Model):
     def __str__(self):
         return f"{self.user.username} enrolled in {self.course.coursename}"
 
+
+class QuizQuestion(models.Model):
+    course = models.CharField(max_length=255,null=False, default='unknown course')
+    question = models.CharField(max_length=255)
+    correct_answer = models.CharField(max_length=255, null=False)
+    
+    def __str__(self):
+        return f"{self.question}"
+
+class QuizOption(models.Model):
+    question = models.ForeignKey(QuizQuestion, related_name='options', on_delete=models.CASCADE)
+    option1 = models.CharField(max_length=255,default='null')
+    option2 = models.CharField(max_length=255, default='null')
+    option3 = models.CharField(max_length=255, default='null')
+    option4 = models.CharField(max_length=255, default='null')
+
+    def __str__(self):
+        return f"{self.question}"
