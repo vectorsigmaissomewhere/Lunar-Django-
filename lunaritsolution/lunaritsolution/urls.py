@@ -23,5 +23,5 @@ urlpatterns = [
     path('enroll/<int:id>/', enroll, name='enroll'),
     path('removeenroll/<int:id>/', removeenroll, name='removeenroll'),
     path('watchvideo/<int:id>/', watchvideo, name='watchvideo'),
-    path('quiz/', quizsection, name='quizsection'), 
+    path('quiz/<str:coursename>/', quizsection, name='quizsection'), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

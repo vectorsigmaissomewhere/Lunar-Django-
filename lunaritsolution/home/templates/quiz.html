@@ -66,31 +66,31 @@
             <!-- Enrolled Courses -->
             <div class="bg-white py-16">
                 <h3 class="text-2xl font-bold mb-6 text-center">Lunar IT Solution</h3>
-                <form id="quizForm" class="space-y-4">
+                <form id="quizForm" class="space-y-4" method="POST">
                     <!-- Question 1 -->
-                    {% for question in questions %}
+                    {% for question in question %}
                     <div class="flex flex-col mb-4">
-                        <label for="q1" class="text-lg text-gray-800 mb-2">{{ question.question }}</label>
+                        <label for="q1" class="text-lg text-gray-800 mb-2">{{ forloop.counter }}. {{ question.question }}</label>
                         {% for option in question.options.all %}
                         <div class="flex items-center space-x-4">
-                            <input type="radio" id="q1a" name="q1" value="a" class="mr-2" required>
+                            <input type="radio" id="q1a" name="q1" value="{{option.option1}}" class="mr-2" required>
                             <label for="q1a" class="text-gray-700">a) {{ option.option1 }}</label>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <input type="radio" id="q1b" name="q1" value="b" class="mr-2" required>
+                            <input type="radio" id="q1b" name="q1" value="{{option.option2}}" class="mr-2" required>
                             <label for="q1b" class="text-gray-700">b) {{ option.option2 }}</label>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <input type="radio" id="q1c" name="q1" value="c" class="mr-2" required>
+                            <input type="radio" id="q1c" name="q1" value="{{option.option3}}" class="mr-2" required>
                             <label for="q1c" class="text-gray-700">c) {{ option.option3 }}</label>
                         </div>
                         <div class="flex items-center space-x-4">
-                            <input type="radio" id="q1d" name="q1" value="d" class="mr-2" required>
+                            <input type="radio" id="q1d" name="q1" value="{{option.option4}}" class="mr-2" required>
                             <label for="q1d" class="text-gray-700">d) {{ option.option4 }}</label>
                         </div>
                         {% endfor %}
                     </div>
-                    {% endfor }
+                    {% endfor %}
                     <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Submit</button>
                 </form>
             </div>

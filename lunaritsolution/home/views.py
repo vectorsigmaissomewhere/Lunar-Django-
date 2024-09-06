@@ -95,10 +95,11 @@ def watchvideo(request, id):
         course = Courses.objects.get(id=id)
         coursevideo = course.video 
         coursename = course.coursename
+        checkcoursename = course.coursename
     except Courses.DoesNotExist:
         messages.error(request, "Course not found.")
         return redirect('enrolledcourse')
-    return render(request, 'watchcourse.html', {'coursevideo': coursevideo, 'coursename': coursename})
+    return render(request, 'watchcourse.html', {'coursevideo': coursevideo, 'coursename': coursename, 'checkcoursename': checkcoursename})
 
 """
 @login_required
@@ -108,5 +109,10 @@ def quizsection(request, coursename):
 """
 
 @login_required
-def quizsection(request):
-    return render(request, 'testing.html')
+def quizsection(request, coursename):
+    questions = QuizQuestion.objects.filter(course=coursename)
+    checklength = len(questions)
+    indexlist = [i+1 for i in range(checklength)]
+    print(indexlist)
+    #return render(request, 'quiz.html')
+    return render(request, 'quiz.html', {'question': questions, 'index': indexlist})
