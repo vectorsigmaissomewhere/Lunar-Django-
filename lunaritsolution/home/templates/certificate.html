@@ -98,61 +98,26 @@
     -->
         <!-- Enrolled Courses--->
         <div class="bg-white py-16">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold mb-8">Certificates</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8e gap-x-20 gap-y-20">
-                    <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                        <div class="relative overflow-hidden">
-                            <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                            <div class="absolute inset-0 bg-black opacity-40"></div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mt-4">Django</h3>
-                        <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                            ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                        <div class="flex items-center justify-between mt-4">
-                            <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Download</button>
-                        </div>
-                    </div>
-                    <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                        <div class="relative overflow-hidden">
-                            <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                            <div class="absolute inset-0 bg-black opacity-40"></div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mt-4">MERN Stack</h3>
-                        <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                            ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                        <div class="flex items-center justify-between mt-4">
-                            <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Download</button>
-                        </div>
-                    </div>
-                    <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                        <div class="relative overflow-hidden">
-                            <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                            <div class="absolute inset-0 bg-black opacity-40"></div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mt-4">.NET</h3>
-                        <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                            ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                        <div class="flex items-center justify-between mt-4">
-                            <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Download</button>
-                        </div>
-                    </div>
-                    <!--adding more  grid-->
-                    <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
-                        <div class="relative overflow-hidden">
-                            <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Product">
-                            <div class="absolute inset-0 bg-black opacity-40"></div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mt-4">Spring Boot</h3>
-                        <p class="text-gray-500 text-sm mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-                            ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
-                        <div class="flex items-center justify-between mt-4">
-                            <button class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Download</button>
-                        </div>
-                    </div>
-        <!--Certificates-->
-              
-    </div>
+          <div class="container mx-auto px-4">
+              <h2 class="text-3xl font-bold mb-8">Certificates</h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8 gap-x-20 gap-y-20">
+                  {% for certificate in certificates %}
+                  <div class="bg-slate-300 rounded-lg shadow-lg p-8 cursor-pointer hover:bg-black text-container transition-transform transform hover:-translate-y-2">
+                      <div class="relative overflow-hidden">
+                          <img class="object-cover w-full h-full" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff" alt="Certificate Image">
+                          <div class="absolute inset-0 bg-black opacity-40"></div>
+                      </div>
+                      <h3 class="text-xl font-bold text-gray-900 mt-4">{{ certificate.created_at|date:"F j, Y" }}</h3>
+                      <p class="text-gray-500 text-sm mt-2">{{ certificate.user.username }}</p>
+                      <div class="flex items-center justify-between mt-4">
+                          <a href="{{ certificate.pdf.url }}" download class="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Download</a>
+                      </div>
+                  </div>
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+      
     <!--footer section-->
     <div class="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div class="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">

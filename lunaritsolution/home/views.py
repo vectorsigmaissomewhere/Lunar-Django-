@@ -1,10 +1,17 @@
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth.forms import AuthenticationForm # login form
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-from .models import Courses,ContactUs, EnrollStudent, QuizQuestion
+from .models import Courses,ContactUs, EnrollStudent, QuizQuestion, Certificate
 from django.contrib.auth.decorators import login_required
+from django.core.files import File
+
+# for pdf certification
+import io
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+from django.core.files.base import ContentFile
 
 def home(request):
     return render(request,'home.html')
@@ -25,8 +32,10 @@ def enrolledcourse(request):
     enrollments = EnrollStudent.objects.filter(user=request.user)
     return render(request, 'enrolledcourse.html', {'enrollments': enrollments})
 
+@login_required
 def certificate(request):
-    return render(request, 'certificate.html')
+    user_certificates = Certificate.objects.filter(user=request.user)
+    return render(request, 'certificate.html', {'certificates': user_certificates})
 
 def allCourse(request):
     return render(request, 'allcourses.html')
@@ -148,6 +157,7 @@ def quizsection(request, coursename):
         """
         score_in_percentage = (marks/len(useranswerlist))*100
         if score_in_percentage >= 80:
+            generate_certificate(request)
             print("=====You are eligible for certificate=======")
         elif score_in_percentage < 80:
             print("=====You must score more than 80% to be eligible for certificate======")
@@ -156,3 +166,29 @@ def quizsection(request, coursename):
     questions = QuizQuestion.objects.filter(course=coursename)
     #return render(request, 'quiz.html')
     return render(request, 'quiz.html', {'question': questions})
+
+# generating certificate
+@login_required
+def generate_certificate(request):
+    buffer = io.BytesIO()
+    p = canvas.Canvas(buffer)
+    p.drawString(100, 750, f"Certificate of Completion")
+    p.drawString(100, 700, f"This certifies that {request.user.username}")
+    p.drawString(100, 650, "has successfully completed the course.")
+    p.showPage()
+    p.save()
+    buffer.seek(0)
+    certificate = Certificate.objects.create(
+        user=request.user,
+        pdf=File(buffer, name=f"certificate_{request.user.username}.pdf")
+    )
+    return FileResponse(buffer, as_attachment=True, filename=f"certificate_{request.user.username}.pdf")
+
+
+@login_required
+def download_certificate(request):
+    try:
+        certificate = Certificate.objects.filter(user=request.user).latest('created_at')
+    except Certificate.DoesNotExist:
+        raise Http404("Certificate does not exist for this user")
+    return FileResponse(certificate.pdf, as_attachment=True, filename=f"certificate_{request.user.username}.pdf")

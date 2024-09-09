@@ -3,7 +3,7 @@ from django.urls import path
 from home.views import (
     home, course, specificcourse, userdashboard, enrolledcourse, certificate, 
     user_login, allCourse, user_logout, contact, enroll, removeenroll, 
-    watchvideo, quizsection
+    watchvideo, quizsection, generate_certificate, download_certificate
 )
 from django.conf import settings
 from django.conf.urls.static import static
@@ -24,4 +24,6 @@ urlpatterns = [
     path('removeenroll/<int:id>/', removeenroll, name='removeenroll'),
     path('watchvideo/<int:id>/', watchvideo, name='watchvideo'),
     path('quiz/<str:coursename>/', quizsection, name='quizsection'), 
+    path('generatepdf/', generate_certificate, name='generatecertificate'),
+    path('download_certificate/', download_certificate, name='download_certificate'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

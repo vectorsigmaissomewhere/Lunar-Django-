@@ -19,7 +19,8 @@ class ContactUs(models.Model):
 
     def str(self):
         return self.fullname
-    
+
+# we are editing enroll student to store the pdf file 
 class EnrollStudent(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
@@ -46,3 +47,13 @@ class QuizOption(models.Model):
 
     def __str__(self):
         return f"{self.question}"
+
+
+# certificate
+class Certificate(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='certificates', default=1)
+    pdf = models.FileField(upload_to='certificates/', default='null')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Certificate for {self.user.username}"
