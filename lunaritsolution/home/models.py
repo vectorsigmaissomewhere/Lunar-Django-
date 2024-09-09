@@ -20,7 +20,6 @@ class ContactUs(models.Model):
     def str(self):
         return self.fullname
 
-# we are editing enroll student to store the pdf file 
 class EnrollStudent(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
